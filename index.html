@@ -1,0 +1,77 @@
+<!DOCTYPE html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Loan Calculator</title>
+
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+
+<script>
+
+//This calculates the total of the loan and is triggered onClick of the button
+function calculateTotal() {
+
+//This assigns the amount entered to a variable
+  var dollarAmount = document.getElementById("dollarAmount").value;
+//Initiate variable
+  var loanAPR;
+
+
+  if (dollarAmount == "") {
+    document.getElementById("dollarAmount").style.outline = "thick solid red";
+
+  } else {
+
+    //This assigns the value selected in the radio boxes to a variable
+    if (document.getElementById('r1').checked) {
+      loanAPR = document.getElementById('r1').value;
+
+    } else if (document.getElementById('r2').checked) {
+      loanAPR = document.getElementById('r2').value;
+
+    } else {
+      loanAPR = document.getElementById('r3').value;
+    }
+
+  //This calculates the amount entered by the term selected
+    var totalLoanAmount =  dollarAmount * loanAPR;
+
+    totalLoanAmount = Math.round(totalLoanAmount * 100) / 100;
+
+  //Display the results
+    document.getElementById("loanTotal").innerHTML = "Total Price For Loan $"+totalLoanAmount;
+
+  } //End of If/Else statement
+
+} //End of Function
+
+</script>
+
+
+  </head>
+  <body>
+    <div id="loan-calculator">
+      <h1>Loan Calculator</h1>
+
+      <form id="calculatorForm">
+
+          <p>I will need to borrow this much at 2% APR:</p>
+          <input type="text" id="dollarAmount" name="dollarAmount" value=""><br><br>
+
+          <p>I need this term:</p>
+
+          <input type="radio" checked="checked" name="termLength" id="r1" value="1.02">12 month<br>
+          <input type="radio" name="termLength" id="r2" value="1.0404">24 month<br>
+          <input type="radio" name="termLength" id="r3" value="1.061208">48 month<br>
+
+          <br><br>
+
+          <input type="button" onclick="calculateTotal()" value="Calculate">
+
+          <p>After interest your loan will be:</p>
+
+          <h3 id="loanTotal"></h3>
+
+      </form>
+    </div>
+  </body>
+</html>
